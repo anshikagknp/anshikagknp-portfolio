@@ -1,0 +1,91 @@
+@import "tailwindcss";
+
+@theme {
+  /* ---- color tokens ---- */
+  --color-ink: #0a0c0f;
+  --color-ink-2: #14171b;
+  --color-ink-3: #1c2025;
+  --color-line: #2a2e33;
+  --color-paper: #ede7da;
+  --color-paper-dim: #b9b3a4;
+  --color-brass: #ff5c3d;
+  --color-brass-soft: #ffab8f;
+  --color-signal: #22d3ee;
+  --color-signal-soft: #8fecfb;
+  --color-ash: #8a8f96;
+
+  /* ---- type ---- */
+  --font-display: "Fraunces", "Source Serif Pro", serif;
+  --font-body: "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, monospace;
+
+  --breakpoint-xs: 30rem;
+}
+
+html {
+  scroll-behavior: auto;
+  background: var(--color-ink);
+}
+
+body {
+  background: var(--color-ink);
+  color: var(--color-paper);
+  font-family: var(--font-body);
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+::selection {
+  background: var(--color-brass);
+  color: var(--color-ink);
+}
+
+* {
+  scrollbar-width: thin;
+  scrollbar-color: var(--color-line) transparent;
+}
+
+::-webkit-scrollbar { width: 8px; height: 8px; }
+::-webkit-scrollbar-thumb { background: var(--color-line); border-radius: 4px; }
+::-webkit-scrollbar-track { background: transparent; }
+
+a { color: inherit; }
+
+.font-display { font-family: var(--font-display); }
+.font-mono { font-family: var(--font-mono); }
+
+/* fluid clamps used across the app */
+.text-hero { font-size: clamp(3.2rem, 12vw, 9.5rem); line-height: 0.92; letter-spacing: -0.02em; }
+.text-h2   { font-size: clamp(2.6rem, 7vw, 4.75rem); line-height: 1.02; letter-spacing: -0.015em; }
+.text-lede { font-size: clamp(1rem, 1.6vw, 1.15rem); line-height: 1.6; }
+
+.grain {
+  pointer-events: none;
+  position: fixed;
+  inset: 0;
+  z-index: 60;
+  opacity: 0.05;
+  mix-blend-mode: overlay;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+.redact-rule {
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--color-line) 15%, var(--color-line) 85%, transparent);
+}
+
+/* focus visibility */
+a:focus-visible, button:focus-visible {
+  outline: 2px solid var(--color-brass);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}
