@@ -36,12 +36,12 @@ export default function Cursor() {
 
     const onEnter = (e) => {
       if (e.target.closest("a, button, [data-cursor-hover]")) {
-        ringRef.current?.classList.add("scale-[1.8]", "border-brass");
+        ringRef.current?.firstChild?.classList.add("scale-[1.8]", "border-brass");
       }
     };
     const onLeave = (e) => {
       if (e.target.closest("a, button, [data-cursor-hover]")) {
-        ringRef.current?.classList.remove("scale-[1.8]", "border-brass");
+        ringRef.current?.firstChild?.classList.remove("scale-[1.8]", "border-brass");
       }
     };
 
@@ -67,8 +67,10 @@ export default function Cursor() {
       />
       <div
         ref={ringRef}
-        className="pointer-events-none fixed top-0 left-0 z-[80] h-8 w-8 -ml-4 -mt-4 rounded-full border border-paper/30 transition-transform duration-200 ease-out"
-      />
+        className="pointer-events-none fixed top-0 left-0 z-[80]"
+      >
+        <div className="h-8 w-8 -ml-4 -mt-4 rounded-full border border-paper/30 transition-all duration-200 ease-out" />
+      </div>
     </>
   );
 }
